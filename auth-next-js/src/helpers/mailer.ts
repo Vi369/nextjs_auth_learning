@@ -32,7 +32,7 @@ export  const sendEmail = async({email, emailType, userId}:any) =>{
           });
     
         const mailOptions = {
-            from: '',
+            from: 'freeEmail',
             to: email,
             subject: emailType === "VERIFY" ? "Verify your email": "Reset your password",
             html: `<p>
