@@ -10,19 +10,25 @@ export  const sendEmail = async({email, emailType, userId}:any) =>{
         // uuid library ka use kar sakte hai special character ni aayenge 
         const hashedToken = await bcryptjs.hash(userId.toString(),10)
 
-        if(emailType ==="VERFIY"){
-            await User.findByIdAndUpdate(userId, {
-                verifyToken: hashedToken,
-                verifyTokenExpiry: Date.now() + 3600000
+        console.log(emailType)
+        if(emailType ==="VERIFY"){
+            const updatetoke = await User.findByIdAndUpdate(userId, {
+                $set:{
+                    verifyToken: hashedToken,
+                    verifyTokenExpiry: new Date(Date.now() + 3600000)
+                }
             })
+            console.log(updatetoke)
         } else if (emailType === "RESET"){
             await User.findByIdAndUpdate(userId, {
-                forgotPasswordToken: hashedToken,
-                forgotPasswordTokenExpiry: Date.now() + 3600000
+                $set:{
+                    forgotPasswordToken: hashedToken,
+                    forgotPasswordTokenExpiry: new Date(Date.now() + 3600000)
+                }
             })
         }
 
-        var transport = nodemailer.createTransport({
+        const transport = nodemailer.createTransport({
             host: "sandbox.smtp.mailtrap.io",
             port: 2525,
             auth: {
