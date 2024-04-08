@@ -15,6 +15,9 @@ export async function GET(request: NextRequest) {
             httpOnly: true,
             expires: new Date(0)
         },)
+        return NextResponse.json({message: "User logout successfully",
+            success: true
+        },{status: 200})
     } catch (error:any) {
         return NextResponse.json({error: error.message},{status: 500})
     }
