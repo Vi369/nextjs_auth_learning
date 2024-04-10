@@ -1,24 +1,25 @@
-import { connectDb } from "@/dbConnection/dbConfig"; 
-import { NextRequest, NextResponse } from 'next/server'
+import { connectDb } from "@/dbConnection/dbConfig";
+import { NextRequest, NextResponse } from 'next/server';
 
-connectDb()
-
+connectDb();
 
 export async function GET(request: NextRequest) {
     try {
-        const responce = NextResponse.json({
+        const response = NextResponse.json({
             message: "Logout successfully",
             success: true
-        })
+        });
 
-        responce.cookies.set("token","", {
+        response.cookies.set("token", "", {
             httpOnly: true,
             expires: new Date(0)
-        },)
-        return NextResponse.json({message: "User logout successfully",
+        });
+
+        return NextResponse.json({
+            message: "User logout successfully",
             success: true
-        },{status: 200})
+        }, { status: 200 });
     } catch (error:any) {
-        return NextResponse.json({error: error.message},{status: 500})
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
