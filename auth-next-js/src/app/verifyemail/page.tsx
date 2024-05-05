@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 
-export default function page() {
+export default function Page() {
 
     // const router = useRouter()
 
